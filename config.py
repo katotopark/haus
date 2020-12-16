@@ -1,0 +1,24 @@
+import os
+
+SECRET_KEY = os.urandom(32)
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+auth0_config = {
+    "AUTH0_DOMAIN": "ozko-fsnd.eu.auth0.com",
+    "ALGORITHMS": "RS256",
+    "API_AUDIENCE": "haus",
+    "AUTH0_CLIENT_ID": "GZ16LRQIczYcuYnMwEa9JGqlarSncsDm",
+    "AUTH0_CALLBACK_URL": "http://localhost:5000/welcome",
+}
+
+bearer_tokens = {
+    "superintendent": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImpZRHlyRXg5dXdiZzR2VkMzc0s4aSJ9.eyJpc3MiOiJodHRwczovL296a28tZnNuZC5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZkNGYxMzk1ZWRmMjgwMDY4NDdhZTk3IiwiYXVkIjoiaGF1cyIsImlhdCI6MTYwODA2Mjc4MiwiZXhwIjoxNjA4MTQ5MTgyLCJhenAiOiJHWjE2TFJRSWN6WWN1WW5Nd0VhOUpHcWxhclNuY3NEbSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmlucXVpcnkiLCJnZXQ6aW5oYWJpdGFudHMiLCJnZXQ6aW5xdWlyaWVzIl19.rBClXYpLIh3SBWnh2QQrEeccdEB22TvVkXvv5EIckWzaR8SpYpLO9o1AgyQai5dtNasG4Tmm-w-18_DDkGySFM83m7xW3YhFGaHulibPHw5zpbJao7gA8V__K2E1eSEtmVIgiqYietxVlYHrUtUg9Nxh-QZRrVNw4f8tPDoi0LuNiJljiFIysaYmaT90ORiYI18crz_akkPY-cwIfonmyHifJsFF1otOvEVp5_kvWij3v5oZD8hbrQg3BBXOPkeKnHHedmkNKJ-Ml7c_JJSWaSbru7rm4pE5BeNPkGJKT9lyjxeQihWGjONAiKj0g2PSGZC74Y-pyW6XwLg291P-yQ",
+    "inhabitant": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImpZRHlyRXg5dXdiZzR2VkMzc0s4aSJ9.eyJpc3MiOiJodHRwczovL296a28tZnNuZC5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZkNzllZWFiZGY5MDgwMDdkZGQzNmQzIiwiYXVkIjoiaGF1cyIsImlhdCI6MTYwODA2MjY5NywiZXhwIjoxNjA4MTQ5MDk3LCJhenAiOiJHWjE2TFJRSWN6WWN1WW5Nd0VhOUpHcWxhclNuY3NEbSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmlucXVpcnkiLCJnZXQ6aW5xdWlyaWVzIiwicGF0Y2g6aW5xdWlyeSIsInBvc3Q6aW5xdWlyeSJdfQ.Wsiv7BYj6g27-_elIXPh-ZgoJpwlyiJVlY23lxkei145h7lLdxF1ohz7SSXCe3Gj7frO1F7rK8syk_GOKosWfnbocWoJ3hjv3xNmjT3RIwqeKic430sDsxZNXO8xy-A6MVJ_Qes2V2CaRrTBWo1N4vM1ENGjf0_WP2RKSXWkwuCcWuMyx3NOGT_V08eDMnl_2rlu0ssa-w4R8hGJlT45OEiPR9OvNOnrJlfQ5mSb2TByhwrTz1oaQqYa1g8I3wubYoYdAFljF5v4rJ1xTe4jiR_tKJCpOUdtgmKTxjoTJXOtVNKdXGKcCdzCPbWFIAB5dvAMnfv4VT30fBT-Me-wHw",
+}
+
+database_setup = {
+    "database_name_production": "haus",
+    "database_name_test": "haus_test",
+    "port": "localhost:5432",
+}
