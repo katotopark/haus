@@ -76,7 +76,7 @@ Returns a formatted list of all inquiries.
 
   The role is for the caretaker of the building. 
   
-  Permissions: they can *get inhabitants*.
+  Permissions: they can *get inhabitants* and *get inquiries*.
 
   Sample mail address: `superintendent@superintendent.com`
 

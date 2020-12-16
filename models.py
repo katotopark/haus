@@ -28,10 +28,10 @@ class Inhabitant(db.Model):
     __tablename__ = "Inhabitant"
 
     id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
     email = Column(String, unique=True, nullable=False)
     flat_number = Column(Integer, nullable=False)
     inquiries = db.relationship("Inquiry", backref="inhabitant", lazy=True)
-    name = Column(String, nullable=False)
 
     def __init__(self, email, flat_number, name):
         self.name = name
@@ -60,10 +60,10 @@ class Inquiry(db.Model):
     __tablename__ = "Inquiry"
 
     id = Column(Integer, primary_key=True)
-    inquirer_id = Column(Integer, db.ForeignKey("Inhabitant.id"), nullable=False)
     items = Column(String, nullable=False)
     status = Column(String, nullable=True)
     tag = Column(String, nullable=True)
+    inquirer_id = Column(Integer, db.ForeignKey("Inhabitant.id"), nullable=False)
 
     def __init__(self, inquirer_id, items, status, tag):
         self.inquirer_id = inquirer_id
