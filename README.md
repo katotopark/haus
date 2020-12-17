@@ -28,7 +28,7 @@ Haus is a platform that is aimed for use within a mid to large scale housing com
 
 - Create Local Database:
 
-  Use `DATABASE_PATH` variable to export the database URI as an environment variable
+  Use `DATABASE_URL` variable to export the database URI as an environment variable
 
 - Run database migrations:
 

@@ -67,37 +67,48 @@ class HausTestCase(unittest.TestCase):
         self.assertEqual(data["code"], "no_authorization_header")
         self.assertTrue(data["description"])
 
-    # def test_delete_inquiry_with_id(self):
-    #     res = self.client().delete("/inquiries/5", headers=inhabitant_auth_header)
-    #     data = json.loads(res.data)
-
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data["success"], True)
-    #     self.assertEqual(len(data["inquiries"]), data["total_count"])
-
-    def test_404_delete_inquiry_with_invalid_id(self):
-        res = self.client().delete("/inquiries/100", headers=inhabitant_auth_header)
+    def test_post_inquiry(self):
+        previous_inquiries = Inquiry.query.all()
+        new_inquiry = {"inquirer_id": 1, "items": "some items", "tag": "some tag"}
+        res = self.client().post(
+            "/inquiries", headers=inhabitant_auth_header, json=new_inquiry
+        )
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 404)
-        self.assertEqual(data["success"], False)
-        self.assertEqual(data["message"], "resource not found")
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+        self.assertEqual(data["total_count"], len(previous_inquiries) + 1)
 
-    def test_405_delete_inquiry_without_id(self):
-        res = self.client().delete("/inquiries", headers=inhabitant_auth_header)
+    def test_400_post_inquiry_without_body(self):
+        res = self.client().post("/inquiries", headers=inhabitant_auth_header)
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 405)
+        self.assertEqual(res.status_code, 400)
         self.assertEqual(data["success"], False)
-        self.assertEqual(data["message"], "method not allowed")
+        self.assertEqual(data["message"], "bad request")
 
-    # def test_patch_inquiry_status(self):
-    #     res = self.client().patch("/inquiries/9", headers=inhabitant_auth_header)
-    #     data = json.loads(res.data)
+    def test_401_post_inquiry_with_invalid_permissions(self):
+        new_inquiry = {"inquirer_id": 1, "items": "some items", "tag": "some tag"}
+        res = self.client().post(
+            "/inquiries", headers=superintendent_auth_header, json=new_inquiry
+        )
+        data = json.loads(res.data)
 
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data["success"], True)
-    #     self.assertTrue(data["inquiry"])
+        self.assertEqual(res.status_code, 401)
+        self.assertEqual(data["code"], "invalid_permissions")
+        self.assertTrue(data["description"])
+
+    def test_patch_inquiry_status(self):
+        current_inquiries = Inquiry.query.all()
+        inquiry_id = current_inquiries[-1].id
+        res = self.client().patch(
+            f"/inquiries/{inquiry_id}", headers=inhabitant_auth_header
+        )
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+        self.assertTrue(data["inquiry"])
 
     def test_404_patch_inquiry_status_with_invalid_id(self):
         res = self.client().patch("/inquiries/100", headers=inhabitant_auth_header)
@@ -115,25 +126,33 @@ class HausTestCase(unittest.TestCase):
         self.assertEqual(data["success"], False)
         self.assertEqual(data["message"], "method not allowed")
 
-    # def test_post_inquiry(self):
-    #     previous_inquiries = Inquiry.query.all()
-    #     new_inquiry = {"inquirer_id": 1, "items": "some items", "tag": "some tag"}
-    #     res = self.client().post(
-    #         "/inquiries", headers=inhabitant_auth_header, json=new_inquiry
-    #     )
-    #     data = json.loads(res.data)
-
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data["success"], True)
-    #     self.assertEqual(data["total_count"], len(previous_inquiries) + 1)
-
-    def test_400_post_inquiry_without_body(self):
-        res = self.client().post("/inquiries", headers=inhabitant_auth_header)
+    def test_delete_inquiry_with_id(self):
+        current_inquiries = Inquiry.query.all()
+        inquiry_id = current_inquiries[-1].id
+        res = self.client().delete(
+            f"/inquiries/{inquiry_id}", headers=inhabitant_auth_header
+        )
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 400)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+        self.assertEqual(len(data["inquiries"]), data["total_count"])
+
+    def test_404_delete_inquiry_with_invalid_id(self):
+        res = self.client().delete("/inquiries/100", headers=inhabitant_auth_header)
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
         self.assertEqual(data["success"], False)
-        self.assertEqual(data["message"], "bad request")
+        self.assertEqual(data["message"], "resource not found")
+
+    def test_405_delete_inquiry_without_id(self):
+        res = self.client().delete("/inquiries", headers=inhabitant_auth_header)
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 405)
+        self.assertEqual(data["success"], False)
+        self.assertEqual(data["message"], "method not allowed")
 
 
 # Make the tests conveniently executable
