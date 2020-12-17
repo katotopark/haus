@@ -2,7 +2,7 @@ import os
 import unittest
 import json
 from flask_sqlalchemy import SQLAlchemy
-from api import app
+from app import app
 from models import setup_db, Inhabitant, Inquiry
 from config import bearer_tokens, database_setup
 
