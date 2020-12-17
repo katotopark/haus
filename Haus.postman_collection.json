@@ -1,0 +1,496 @@
+{
+	"info": {
+		"_postman_id": "33b64563-5909-4658-9d2c-3c408d8560df",
+		"name": "Haus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Superintendent",
+			"item": [
+				{
+					"name": "/inhabitants",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b64aed4e-4e9f-47d2-88cd-a44d1b278312",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"value contains inhabitants\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.inhabitants).to.be.an('array')",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/inhabitants",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"inhabitants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/inquiries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "50d6328b-9630-4ae8-968c-397c870d6a53",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/inquiries",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"inquiries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/inquiries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d4a83675-9bb9-40e9-b342-5dd6eac96e11",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tag\": \"groceries\",\n    \"inquirer_id\": 1,\n    \"items\": \"grocery items\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/inquiries",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"inquiries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/inquiries/:id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5e8b9676-1319-427c-8939-72c767e4e055",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/inquiries/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"inquiries",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/inquiries/:id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "52196562-9715-4f4b-bfbb-338d2d218f33",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/inquiries/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"inquiries",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImpZRHlyRXg5dXdiZzR2VkMzc0s4aSJ9.eyJpc3MiOiJodHRwczovL296a28tZnNuZC5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZkYTcxMDRlM2IwNGIwMDc2YTRhMDdiIiwiYXVkIjoiaGF1cyIsImlhdCI6MTYwODIyNDQxMiwiZXhwIjoxNjA4MzEwODEyLCJhenAiOiJHWjE2TFJRSWN6WWN1WW5Nd0VhOUpHcWxhclNuY3NEbSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmlucXVpcnkiLCJnZXQ6aW5oYWJpdGFudHMiLCJnZXQ6aW5xdWlyaWVzIl19.MXYOGTWSBjOqdD9uBTVQxdLMyMOlaq8dZsMQRW9tTzC5fTfYm9PxJjFbb4N79kZzjEZemGysf68_jslSnIErwVMaJ9KyZbK93vS19zhnSEUbzE_iD8Kijf5GI6A37MNp3nOAsLogyNApNPyFQGb3rFrH9Xuj0Jw7JdfRopW4axr3kVbEgWK92MyYlDrUDL7lbaUWBiMJHxnvLmQP3oFEFUPqbvaR8NJteJHfmpz6k74_RUCEDX_Xxzy4Cy9B2GgyC2X9ZN-CcYib0YUZjepfm4V6G5ZG6NsNNadzk2N6Rus5m6HSn_SVooldgdcPHwqIFEgTcfoB2v4EuYJTJl08rg",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cd4ed4bd-4e3d-4f4b-b3d4-9bbc2ead624f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1d4124e4-a047-41a7-bf12-249ab5b8d5de",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Inhabitant",
+			"item": [
+				{
+					"name": "/inhabitants",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d743b527-b03c-41c5-954f-5761f3d7bf31",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/inhabitants",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"inhabitants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/inquiries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3b6d08e1-79ac-4474-a8d4-024e72a1274b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"value contains inquiries\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.inquiries).to.be.an('array')",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/inquiries",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"inquiries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/inquiries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5adad6a1-8a41-461a-884f-5426de0dd829",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tag\": \"groceries\",\n    \"inquirer_id\": 1,\n    \"items\": \"grocery items\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/inquiries",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"inquiries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/inquiries/:id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6c7e8272-3ffd-4971-8973-b229192fc61a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/inquiries/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"inquiries",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/inquiries/:id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bb3dbf1b-dd47-4895-aceb-c5591b1d390a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/inquiries/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"inquiries",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImpZRHlyRXg5dXdiZzR2VkMzc0s4aSJ9.eyJpc3MiOiJodHRwczovL296a28tZnNuZC5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZkYTcxMzhjNTEwNjAwMDcyYTkzMDk2IiwiYXVkIjoiaGF1cyIsImlhdCI6MTYwODIyNDUzMiwiZXhwIjoxNjA4MzEwOTMyLCJhenAiOiJHWjE2TFJRSWN6WWN1WW5Nd0VhOUpHcWxhclNuY3NEbSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmlucXVpcnkiLCJnZXQ6aW5xdWlyaWVzIiwicGF0Y2g6aW5xdWlyeSIsInBvc3Q6aW5xdWlyeSJdfQ.WXjUHHa1b5Wky6zXVRpAMbR9uk3njDxZm18Zhj-QXVV-59cEaASTve8McDjboG2mRIY4ULX6lly50oHApS0EGZFma2MkDOSffRxWaaPCbjfE0GiK62gsdoMnXtqfyrml4unqjSy1MXFL1tJFzmukIhUYWGliPIQOqDJ9xDUk9mQXMuawGO2WRZSnICMJNAuE4kll2u3Ppo6DhUl_rIjiw22YBis2tNJl_FP8GqqGqmU3VWNGw51Ed75iAkQ8cE12RNRwQniMx0q788oE5xTstjy9hB65eZsrSswQkNVu6lkpveb8_UsMX4Abrd8-j0eEN2ivV4V-NSR3b_olPMHMMw",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "622c4ad4-851a-4b44-9107-d85880cac4dd",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "14454e4d-a058-4710-9852-d6024312e115",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "/authorization/url",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3cf9e71d-1e9b-4f3d-a177-22d69264c1de",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/authorization/url",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"authorization",
+								"url"
+							]
+						},
+						"description": "This endpoint returns the login url for Auth0"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "7a6e4577-7e35-456c-af1d-264f6eccce0f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "57b95ce3-28b0-4dbb-ba74-aa637eb8ea60",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "6860ffad-bd3c-446d-a8d2-41a9f7d4cbb0",
+			"key": "host",
+			"value": "http://localhost:5000"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
