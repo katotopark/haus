@@ -20,7 +20,8 @@ class HausTestCase(unittest.TestCase):
         self.database_path = os.environ.get(
             "DATABASE_URL",
             "postgresql://{}/{}".format(
-                database_setup["port"], database_setup["database_name_production"]
+                database_setup["port"],
+                database_setup["database_name_production"],
             ),
         )
         setup_db(self.app, self.database_path)
@@ -35,7 +36,9 @@ class HausTestCase(unittest.TestCase):
         pass
 
     def test_get_inhabitants(self):
-        res = self.client().get("/inhabitants", headers=superintendent_auth_header)
+        res = self.client().get(
+            "/inhabitants", headers=superintendent_auth_header
+        )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -69,7 +72,11 @@ class HausTestCase(unittest.TestCase):
 
     def test_post_inquiry(self):
         previous_inquiries = Inquiry.query.all()
-        new_inquiry = {"inquirer_id": 1, "items": "some items", "tag": "some tag"}
+        new_inquiry = {
+            "inquirer_id": 1,
+            "items": "some items",
+            "tag": "some tag",
+        }
         res = self.client().post(
             "/inquiries", headers=inhabitant_auth_header, json=new_inquiry
         )
@@ -88,7 +95,11 @@ class HausTestCase(unittest.TestCase):
         self.assertEqual(data["message"], "bad request")
 
     def test_401_post_inquiry_with_invalid_permissions(self):
-        new_inquiry = {"inquirer_id": 1, "items": "some items", "tag": "some tag"}
+        new_inquiry = {
+            "inquirer_id": 1,
+            "items": "some items",
+            "tag": "some tag",
+        }
         res = self.client().post(
             "/inquiries", headers=superintendent_auth_header, json=new_inquiry
         )
@@ -111,7 +122,9 @@ class HausTestCase(unittest.TestCase):
         self.assertTrue(data["inquiry"])
 
     def test_404_patch_inquiry_status_with_invalid_id(self):
-        res = self.client().patch("/inquiries/100", headers=inhabitant_auth_header)
+        res = self.client().patch(
+            "/inquiries/100", headers=inhabitant_auth_header
+        )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -139,7 +152,9 @@ class HausTestCase(unittest.TestCase):
         self.assertEqual(len(data["inquiries"]), data["total_count"])
 
     def test_404_delete_inquiry_with_invalid_id(self):
-        res = self.client().delete("/inquiries/100", headers=inhabitant_auth_header)
+        res = self.client().delete(
+            "/inquiries/100", headers=inhabitant_auth_header
+        )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -147,7 +162,9 @@ class HausTestCase(unittest.TestCase):
         self.assertEqual(data["message"], "resource not found")
 
     def test_405_delete_inquiry_without_id(self):
-        res = self.client().delete("/inquiries", headers=inhabitant_auth_header)
+        res = self.client().delete(
+            "/inquiries", headers=inhabitant_auth_header
+        )
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 405)

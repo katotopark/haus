@@ -52,7 +52,11 @@ class Inhabitant(db.Model):
         db.session.commit()
 
     def format(self):
-        return {"email": self.email, "flat_number": self.flat_number, "name": self.name}
+        return {
+            "email": self.email,
+            "flat_number": self.flat_number,
+            "name": self.name,
+        }
 
     def __repr__(self):
         return f"{self.name}:{self.email}"
@@ -65,7 +69,9 @@ class Inquiry(db.Model):
     items = Column(String, nullable=False)
     status = Column(String, nullable=True)
     tag = Column(String, nullable=True)
-    inquirer_id = Column(Integer, db.ForeignKey("Inhabitant.id"), nullable=False)
+    inquirer_id = Column(
+        Integer, db.ForeignKey("Inhabitant.id"), nullable=False
+    )
 
     def __init__(self, inquirer_id, items, status, tag):
         self.inquirer_id = inquirer_id

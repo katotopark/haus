@@ -20,9 +20,13 @@ Haus is a platform that is aimed for use within a mid to large scale housing com
 
   `git clone https://github.com/katotopark/haus`
 
+- Set up a virtual environment (e.g virtualenv - See [documentation](https://virtualenv.pypa.io/en/stable/)):
+
+  `pip3 install virtualenv`
+
 - Install the dependencies:
 
-  `pip install -r requirements.txt`
+  `pip3 install -r requirements.txt`
 
 - Export environment variables:
 
@@ -54,21 +58,41 @@ Haus is a platform that is aimed for use within a mid to large scale housing com
 
   Returns a formatted list of all inhabitants.
 
+  Sample request: `curl http://localhost:5000/inhabitants -X GET -H "Content-Type: application/json" -H "Authorization: Bearer {INSERT_TOKEN_HERE}"`
+
+  Sample response: `{ "inhabitants": [{"name": "John Smith", "email": "john_smith@haus.com", "flat_number": 1029}], "success": True, "total_count": 1 }`
+
 - **GET** `/inquiries`
 
-Returns a formatted list of all inquiries.
+  Returns a formatted list of all inquiries.
+
+  Sample request: `curl http://localhost:5000/inquiries -X GET -H "Content-Type: application/json" -H "Authorization: Bearer {INSERT_TOKEN_HERE}"`
+
+  Sample response: `{ "inquiries": [{ "inquirer_id": 1, "items": "Some items", "status", "active", "tag": "Some tag" }], "success": True, "total_count": 1 }`
 
 - **POST** `/inquiries`
 
   Creates a new inquiry provided with inquirer_id, items, and tag.
 
+  Sample request: `curl http://localhost:5000/inhabitants -X POST -H "Content-Type: application/json" -H "Authorization: Bearer {INSERT_TOKEN_HERE}" d '{"inquirer_id": 1, "items": "Some items", "tag": "Some tag"}'`
+
+  Sample response: `{ "inquiries": [{ "inquirer_id": 1, "items": "Some items", "status", "active", "tag": "Some tag" }], "success": True, "total_count": 1 }`
+
 - **PATCH** `/inquiries/:id`
 
   Changes inquiry status provided with the id.
 
+  Sample request: `curl http://localhost:5000/inhabitants -X PATCH -H "Content-Type: application/json" -H "Authorization: Bearer {INSERT_TOKEN_HERE}"`
+
+  Sample response: `{ "inquiry": { "inquirer_id": 1, "items": "Some items", "status", "active", "tag": "Some tag" }, "success": true }`
+
 - **DELETE** `/inquiries/:id`
 
   Deletes an inquiry provided with the id.
+
+  Sample request: `curl http://localhost:5000/inhabitants -X DELETE -H "Content-Type: application/json" -H "Authorization: Bearer {INSERT_TOKEN_HERE}"`
+
+  Sample response: `{"inquiries": [], "success": true, "total_count": 0}`
 
 ### Roles & Permissions:
 

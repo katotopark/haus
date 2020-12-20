@@ -1,9 +1,16 @@
 import json
-from flask import request, _request_ctx_stack
+from flask import (
+    request,
+    _request_ctx_stack,
+)
 from functools import wraps
 from jose import jwt
-from urllib.request import urlopen
-from config import auth0_config
+from urllib.request import (
+    urlopen,
+)
+from config import (
+    auth0_config,
+)
 
 
 AUTH0_DOMAIN = auth0_config["AUTH0_DOMAIN"]
@@ -14,13 +21,20 @@ AUTH0_CLIENT_ID = auth0_config["AUTH0_CLIENT_ID"]
 
 
 class AuthError(Exception):
-    def __init__(self, error, status_code):
+    def __init__(
+        self,
+        error,
+        status_code,
+    ):
         self.error = error
         self.status_code = status_code
 
 
 def get_token_auth_header():
-    auth = request.headers.get("Authorization", None)
+    auth = request.headers.get(
+        "Authorization",
+        None,
+    )
     if not auth:
         raise AuthError(
             {
@@ -32,15 +46,27 @@ def get_token_auth_header():
     auth_list = auth.split()
     if auth_list[0].lower() != "bearer":
         raise AuthError(
-            {"code": "invalid_header", "description": "Token type not specified."}, 401
+            {
+                "code": "invalid_header",
+                "description": "Token type not specified.",
+            },
+            401,
         )
     elif len(auth_list) == 1:
         raise AuthError(
-            {"code": "invalid_header", "description": "Token not found."}, 401
+            {
+                "code": "invalid_header",
+                "description": "Token not found.",
+            },
+            401,
         )
     elif len(auth_list) > 2:
         raise AuthError(
-            {"code": "invalid_header", "description": "Token has wrong format."}, 401
+            {
+                "code": "invalid_header",
+                "description": "Token has wrong format.",
+            },
+            401,
         )
     token = auth_list[1]
     return token
@@ -76,7 +102,11 @@ def verify_decode_jwt(token):
     rsa_key = {}
     if "kid" not in unverified_header:
         raise AuthError(
-            {"code": "invalid_header", "description": "Authorization malformed."}, 401
+            {
+                "code": "invalid_header",
+                "description": "Authorization malformed.",
+            },
+            401,
         )
 
     for key in jwks["keys"]:
@@ -102,7 +132,11 @@ def verify_decode_jwt(token):
 
         except jwt.ExpiredSignatureError:
             raise AuthError(
-                {"code": "token_expired", "description": "Token expired."}, 401
+                {
+                    "code": "token_expired",
+                    "description": "Token expired.",
+                },
+                401,
             )
 
         except jwt.JWTClaimsError:
@@ -130,14 +164,25 @@ def verify_decode_jwt(token):
     )
 
 
-def requires_auth(permission=""):
-    def requires_auth_decorator(f):
+def requires_auth(
+    permission="",
+):
+    def requires_auth_decorator(
+        f,
+    ):
         @wraps(f)
         def wrapper(*args, **kwargs):
             token = get_token_auth_header()
             payload = verify_decode_jwt(token)
-            check_permissions(permission, payload)
-            return f(payload, *args, **kwargs)
+            check_permissions(
+                permission,
+                payload,
+            )
+            return f(
+                payload,
+                *args,
+                **kwargs,
+            )
 
         return wrapper
 

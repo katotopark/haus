@@ -26,7 +26,8 @@ def after_request(response):
         "Access-Control-Allow-Headers", "Content-Type, Authorization, true"
     )
     response.headers.add(
-        "Access-Control-Allow-Methods", "GET, PUT, PATCH, POST, DELETE, OPTIONS"
+        "Access-Control-Allow-Methods",
+        "GET, PUT, PATCH, POST, DELETE, OPTIONS",
     )
     return response
 
@@ -53,7 +54,9 @@ def get_inhabitants(f):
             raise ErrorWithCode(404)
         return jsonify(
             {
-                "inhabitants": [inhabitant.format() for inhabitant in inhabitants],
+                "inhabitants": [
+                    inhabitant.format() for inhabitant in inhabitants
+                ],
                 "success": True,
                 "total_count": len(inhabitants),
             }
@@ -222,7 +225,9 @@ def not_allowed(error):
 @app.errorhandler(422)
 def unprocessable(error):
     return (
-        jsonify({"error": error.code, "message": "unprocessable", "success": False}),
+        jsonify(
+            {"error": error.code, "message": "unprocessable", "success": False}
+        ),
         422,
     )
 
