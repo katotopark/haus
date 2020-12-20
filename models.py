@@ -1,6 +1,7 @@
 import os
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, String, Integer
+from flask_migrate import Migrate
 from config import database_setup
 
 
@@ -17,6 +18,7 @@ def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
+    migrate = Migrate(app, db)
 
 
 def db_drop_and_create_all():
