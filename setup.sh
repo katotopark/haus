@@ -1,7 +1,7 @@
 export AUTH0_DOMAIN="ozko-fsnd.eu.auth0.com"
 export ALGORITHMS=["RS256"]
 export API_AUDIENCE="haus"
-export DATABASE_URL="postgresql://localhost:5432/haus"
+export DATABASE_URL="postgres://ayccrekhbdxway:443e3d10b4d180b7b66d3ef8c3c2f4f0a8ee293472c34977d042fbf603ea0bdf@ec2-34-194-198-238.compute-1.amazonaws.com:5432/ddoud8tgtu919f"
 export FLASK_APP=app.py
 export FLASK_ENV=development
 
