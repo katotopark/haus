@@ -1,5 +1,7 @@
 # FSND - Capstone Project: HAUS
 
+The application is deployed via Heroku at [this address](https://haus-fsnd.herokuapp.com/).
+
 1.[Motivation](#motivation)
 
 2.[Project setup](#project-setup)
@@ -10,11 +12,11 @@
 
 ### Motivation
 
-Haus is a platform that is aimed for use within a mid to large scale housing complex in order to facilitate and encourage neighbourly interaction. As an inhabitant of the building that one lives in, one has the possibility to post an inquiry in a time of need or respond to an inquiry posted by another neighbour that is in need. 
+Haus is a platform that is aimed for use within a mid to large scale housing complex in order to facilitate and encourage neighbourly interaction. As an inhabitant of the building that one lives in, one has the possibility to post an inquiry in a time of need or respond to an inquiry posted by another neighbour that is in need.
 
 ### Project Setup
 
-- Clone the project: 
+- Clone the project:
 
   `git clone https://github.com/katotopark/haus`
 
@@ -24,7 +26,7 @@ Haus is a platform that is aimed for use within a mid to large scale housing com
 
 - Export environment variables:
 
-  `./setup.sh` or `sh  setup.sh` or `bash setup.sh`
+  `./setup.sh` or `sh setup.sh` or `bash setup.sh`
 
 - Create Local Database:
 
@@ -39,7 +41,7 @@ Haus is a platform that is aimed for use within a mid to large scale housing com
   `flask db upgrade`
 
 - Run the app:
-  
+
   `flask run`
 
 - Run tests:
@@ -62,7 +64,7 @@ Returns a formatted list of all inquiries.
 
 - **PATCH** `/inquiries/:id`
 
-  Changes inquiry status provided with the id. 
+  Changes inquiry status provided with the id.
 
 - **DELETE** `/inquiries/:id`
 
@@ -74,9 +76,9 @@ Returns a formatted list of all inquiries.
 
 - Superintendent:
 
-  The role is for the caretaker of the building. 
-  
-  Permissions: they can *get inhabitants* and *get inquiries*.
+  The role is for the caretaker of the building.
+
+  Permissions: they can _get inhabitants_ and _get inquiries_.
 
   Sample mail address: `superintendent@superintendent.com`
 
@@ -84,9 +86,9 @@ Returns a formatted list of all inquiries.
 
 - Inhabitant:
 
-  The role is for the resident of the building. 
-  
-  Permissions: they can *read, post, delete, patch inquiries*.
+  The role is for the resident of the building.
+
+  Permissions: they can _read, post, delete, patch inquiries_.
 
   Sample mail address: `inhabitant@inhabitant.com`
 
