@@ -65,39 +65,6 @@ def get_inhabitants(f):
         db.session.close()
 
 
-@app.route("/inhabitants", methods=["POST"])
-def create_inhabitant():
-    data = request.get_json()
-    try:
-        if not data:
-            raise ErrorWithCode(400)
-
-        new_inhabitant = Inhabitant(
-            email=data.get("email"),
-            name=data.get("name"),
-            flat_number=data.get("flat_number"),
-        )
-        new_inhabitant.insert()
-
-        inhabitants = Inhabitant.query.all()
-        if len(inhabitants) <= 0:
-            raise ErrorWithCode(500)
-
-        return jsonify(
-            {
-                "inhabitants": [inhabitant.format() for inhabitant in inhabitants],
-                "new_inhabitant": new_inhabitant.format(),
-                "success": True,
-                "total_count": len(inhabitants),
-            }
-        )
-    except ErrorWithCode as e:
-        db.session.rollback()
-        abort(e.code)
-    finally:
-        db.session.close()
-
-
 # get inquiries
 @app.route("/inquiries", methods=["GET"])
 @requires_auth("get:inquiries")

@@ -143,6 +143,7 @@ COPY public."Inquiry" (id, items, status, tag, inquirer_id) FROM stdin;
 --
 
 COPY public.alembic_version (version_num) FROM stdin;
+663909c65923
 cb031a456fb8
 \.
 
